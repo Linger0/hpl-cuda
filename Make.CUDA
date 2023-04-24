@@ -79,7 +79,7 @@ ARCH         = CUDA
 # - HPL Directory Structure / HPL library ------------------------------
 # ----------------------------------------------------------------------
 #
-TOPdir       = $(HOME)/code/hpl-cuda
+TOPdir       = $(HOME)/workspace/hpl-cuda
 INCdir       = $(TOPdir)/include
 BINdir       = $(TOPdir)/bin/$(ARCH)
 LIBdir       = $(TOPdir)/lib/$(ARCH)
@@ -93,9 +93,9 @@ HPLlib       = $(LIBdir)/libhpl.a
 # header files,  MPlib  is defined  to be the name of  the library to be 
 # used. The variable MPdir is only used for defining MPinc and MPlib.
 #
-MPdir        = $(MPICH2_INSTALL_PATH)
-MPinc        = $(MPICH2_INCLUDES)
-MPlib        = $(MPICH2_LIBRARIES)
+MPdir        = /usr/local
+MPinc        = -I$(MPdir)/include
+MPlib        = -L$(MPdir)/lib -lmpi
 #
 # ----------------------------------------------------------------------
 # - Linear Algebra library (BLAS or VSIPL) -----------------------------
@@ -104,10 +104,10 @@ MPlib        = $(MPICH2_LIBRARIES)
 # header files,  LAlib  is defined  to be the name of  the library to be 
 # used. The variable LAdir is only used for defining LAinc and LAlib.
 #
-LAdir        = $(BLAS_INSTALL_PATH)
-CUBLASdir    = $(CUBLAS_INSTALL_PATH)
-LAinc        = $(BLAS_INCLUDES) $(CUBLAS_INCLUDES)
-LAlib        = $(BLAS_LIBRARIES) $(CUBLAS_LIBRARIES)
+LAdir        = /opt/OpenBLAS
+CUBLASdir    = /usr/local/cuda
+LAinc        = -I$(LAdir)/include -I$(CUBLASdir)/include
+LAlib        = -L$(LAdir)/lib -lopenblas -L$(CUBLASdir)/lib64 -lcublas -lcudart -lcuda
 #
 # ----------------------------------------------------------------------
 # - F77 / C interface --------------------------------------------------
